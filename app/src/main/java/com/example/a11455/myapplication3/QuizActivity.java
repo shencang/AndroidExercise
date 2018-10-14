@@ -67,7 +67,7 @@ public class QuizActivity extends AppCompatActivity {
 //                        toast.setGravity(Gravity.TOP,0,0);
 //                        toast.show();
                 checkAnswer(true);
-         
+
                 
             }
         });
