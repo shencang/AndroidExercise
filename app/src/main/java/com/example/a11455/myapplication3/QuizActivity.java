@@ -20,15 +20,20 @@ public class QuizActivity extends AppCompatActivity {
     private TextView mQuestionTextView;
     private static final String TAG=" QuizActivity";
     private static final String KEY_INDEX="index";
+    private int score;
 
 
     private Question[] mQuestionBank= new Question[]{
-        new Question(R.string.question_aili,true),
-                new Question(R.string.question_xiaolian,true),
-                new Question(R.string.question_xiana,true),
-                new Question(R.string.question_chuyin,true),
-                new Question(R.string.question_jiyue,true),
-                new Question(R.string.question_nwl,true)
+                new Question(R.string.question_aiLi,true),
+                new Question(R.string.question_xiaoLian,true),
+                new Question(R.string.question_xiaNa,true),
+                new Question(R.string.question_chuYin,true),
+                new Question(R.string.question_jiYue,true),
+                new Question(R.string.question_Nwl,true),
+                new Question(R.string.question_deLiSha,true),
+                new Question(R.string.question_xueEr,true),
+                new Question(R.string.question_Alkxya,true),
+                new Question(R.string.question_xiaoAi,true)
     };
     private int mCurrentIndex =0;
 
@@ -62,7 +67,7 @@ public class QuizActivity extends AppCompatActivity {
 //                        toast.setGravity(Gravity.TOP,0,0);
 //                        toast.show();
                 checkAnswer(true);
-
+         
                 
             }
         });
@@ -72,6 +77,7 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Toast.makeText(QuizActivity.this,R.string.incorrect_toast,Toast.LENGTH_SHORT).show();
                 checkAnswer(false);
+
 
             }
         });
@@ -126,12 +132,29 @@ public class QuizActivity extends AppCompatActivity {
         int messageResId=0;
         if (userPressedTrue==answerIsTrue){
             messageResId=R.string.correct_toast;
+            score=score+10;
+            mCurrentIndex=(mCurrentIndex+1)%mQuestionBank.length;
+            //   int question =mQuestionBank[mCurrentIndex].getmTextResId();
+            //    mQuestionTextView.setText(question);
+            upDateQuestion();
 
         }else {
             messageResId=R.string.incorrect_toast;
+            mCurrentIndex=(mCurrentIndex+1)%mQuestionBank.length;
+            //   int question =mQuestionBank[mCurrentIndex].getmTextResId();
+            //    mQuestionTextView.setText(question);
+            upDateQuestion();
+
 
         }
         Toast.makeText(this,messageResId,Toast.LENGTH_SHORT).show();
+        Log.d(TAG,Integer.toString(mQuestionBank.length)+" "+Integer.toString(score));
+
+        if (mCurrentIndex==mQuestionBank.length-1){
+            Toast toast =  Toast.makeText(QuizActivity.this,"您的得分："+score+"分",Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP,0,0);
+            toast.show();
+        }
 
     }
 

@@ -1,15 +1,25 @@
 <resources>
     <string name="app_name">诺瓦露</string>
-    <string name="question_nwl">你喜欢诺瓦露吗？</string>
+    <string name="question_Nwl">你喜欢诺瓦露吗？</string>
     <string name="true_button">喜欢</string>
     <string name="false_button">不喜欢</string>
     <string name="correct_toast">感谢您的喜爱</string>
+    <string name="question_true">正确</string>
+    <string name="question_false">错误</string>
     <string name="incorrect_toast">呜~真的不考虑再喜欢一下吗~</string>
     <string name="next_button">下一个</string>
-    <string name="question_chuyin">你喜欢初音吗？</string>
-    <string name="question_xiana">你喜欢夏娜吗?</string>
-    <string name="question_jiyue">你喜欢姬月吗？</string>
-    <string name="question_aili">你喜欢爱丽吗？</string>
-    <string name="question_xiaolian">你喜欢小怜吗？</string>
+    <string name="question_chuYin">你喜欢初音吗？</string>
+    <string name="question_xiaNa">你喜欢夏娜吗?</string>
+    <string name="question_jiYue">你喜欢姬月吗？</string>
+    <string name="question_aiLi">你喜欢爱丽吗？</string>
+    <string name="question_xiaoLian">你喜欢小怜吗？</string>
+    <string name="question_xiaoAi">你喜欢小爱吗？</string>
+    <string name="question_Alkxya">你喜欢阿雷克西娅吗？</string>
+    <string name="question_xueEr">你喜欢雪儿吗？</string>
+    <string name="question_deLiSha">你喜欢德丽莎吗？</string>
+
+
+
+
     <string name="back_button">上一个</string>
 </resources>
