@@ -79,6 +79,7 @@ public class QuizActivity extends AppCompatActivity {
                 checkAnswer(false);
 
 
+
             }
         });
 
@@ -117,6 +118,7 @@ public class QuizActivity extends AppCompatActivity {
 
     }
     private void upDateQuestion(){
+        Log.d(TAG,"Updating question text",new Exception());
         int question =mQuestionBank[mCurrentIndex].getmTextResId();
         mQuestionTextView.setText(question);
     }
@@ -138,12 +140,14 @@ public class QuizActivity extends AppCompatActivity {
             //    mQuestionTextView.setText(question);
             upDateQuestion();
 
+
         }else {
             messageResId=R.string.incorrect_toast;
             mCurrentIndex=(mCurrentIndex+1)%mQuestionBank.length;
             //   int question =mQuestionBank[mCurrentIndex].getmTextResId();
             //    mQuestionTextView.setText(question);
             upDateQuestion();
+
 
 
         }
@@ -154,6 +158,7 @@ public class QuizActivity extends AppCompatActivity {
             Toast toast =  Toast.makeText(QuizActivity.this,"您的得分："+score+"分",Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.TOP,0,0);
             toast.show();
+            score=0;
         }
 
     }
