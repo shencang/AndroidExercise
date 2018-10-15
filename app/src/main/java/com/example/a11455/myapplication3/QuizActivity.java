@@ -1,7 +1,9 @@
 package com.example.a11455.myapplication3;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.media.Image;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,7 +24,10 @@ public class QuizActivity extends AppCompatActivity {
     private TextView mQuestionTextView;
     private static final String TAG=" QuizActivity";
     private static final String KEY_INDEX="index";
+    private static final int REQUSET_CODE_CHEAT=0;
     private int score;
+    private boolean mIsCheater;
+
 
 
     private Question[] mQuestionBank= new Question[]{
@@ -92,6 +97,7 @@ public class QuizActivity extends AppCompatActivity {
                 mCurrentIndex=(mCurrentIndex+1)%mQuestionBank.length;
              //   int question =mQuestionBank[mCurrentIndex].getmTextResId();
             //    mQuestionTextView.setText(question);
+                mIsCheater=false;
                 upDateQuestion();
             }
         });
@@ -121,7 +127,8 @@ public class QuizActivity extends AppCompatActivity {
                // Intent intent = new Intent(QuizActivity.this,CheatActivity.class);
                 boolean answerIsTrue =mQuestionBank[mCurrentIndex].ismAnswerTrue();
                 Intent intent = CheatActivity.newIntent(QuizActivity.this,answerIsTrue);
-                startActivity(intent);
+               // startActivity(intent);
+                startActivityForResult(intent,REQUSET_CODE_CHEAT);
             }
         });
 
@@ -147,6 +154,12 @@ public class QuizActivity extends AppCompatActivity {
         boolean answerIsTrue =mQuestionBank[mCurrentIndex].ismAnswerTrue();
 
         int messageResId=0;
+        if (mIsCheater){
+            messageResId=R.string.judgment_toast;
+        }else {
+
+
+
         if (userPressedTrue==answerIsTrue){
             messageResId=R.string.correct_toast;
             score=score+10;
@@ -174,6 +187,7 @@ public class QuizActivity extends AppCompatActivity {
             toast.setGravity(Gravity.TOP,0,0);
             toast.show();
             score=0;
+        }
         }
 
     }
@@ -220,5 +234,18 @@ public class QuizActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
         Log.i(TAG,"onSaveInstanceState");
         savedInstanceState.putInt(KEY_INDEX,mCurrentIndex);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode!= Activity.RESULT_OK){
+            return;
+        }
+        if (requestCode==REQUSET_CODE_CHEAT){
+            if (data==null){
+                return;
+            }
+            mIsCheater =CheatActivity.wasAnswerShown(data);
+        }
     }
 }
