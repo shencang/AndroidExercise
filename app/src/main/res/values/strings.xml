@@ -17,8 +17,10 @@
     <string name="question_Alkxya">你喜欢阿雷克西娅吗？</string>
     <string name="question_xueEr">你喜欢雪儿吗？</string>
     <string name="question_deLiSha">你喜欢德丽莎吗？</string>
-
-
+    <string name="warning_text">你确定要偷看吗？</string>
+    <string name="show_answer_button">查看答案</string>
+    <string name="cheat_button">你骗我~</string>
+    <string name="judgment_toast">骗我是不对的~</string>
 
 
     <string name="back_button">上一个</string>

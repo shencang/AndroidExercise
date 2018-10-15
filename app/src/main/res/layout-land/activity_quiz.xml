@@ -40,26 +40,41 @@
         android:layout_gravity="center_vertical|center_horizontal"
         android:layout_marginTop="56dp"
 
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
 
-        <ImageButton
-            android:id="@+id/back_button"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/back"
-            android:background="@color/Nocolor"
-            />
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/next_button"
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back"
+                android:background="@color/Nocolor"
+                />
+
+            <ImageButton
+                android:id="@+id/next_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/next"
+                android:background="@color/Nocolor"
+                />
+
+        </LinearLayout>
+
+
+
+        <Button
+            android:id="@+id/cheat_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/next"
-            android:background="@color/Nocolor"
-
-            
-            />
+            android:layout_gravity="bottom|center_horizontal"
+            android:text="@string/cheat_button"/>
 
 </LinearLayout>
 

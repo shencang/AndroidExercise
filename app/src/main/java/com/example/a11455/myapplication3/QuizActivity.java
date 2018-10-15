@@ -1,5 +1,6 @@
 package com.example.a11455.myapplication3;
 
+import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private Button mTruebtn;
     private Button mFalsebtn;
+    private Button mCheatButton;
     private ImageButton mNextButton;
     private ImageButton mBackButton;
     private TextView mQuestionTextView;
@@ -110,6 +112,19 @@ public class QuizActivity extends AppCompatActivity {
 
             }
         });
+
+        mCheatButton = (Button)findViewById(R.id.cheat_button);
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Start cheatActivity
+               // Intent intent = new Intent(QuizActivity.this,CheatActivity.class);
+                boolean answerIsTrue =mQuestionBank[mCurrentIndex].ismAnswerTrue();
+                Intent intent = CheatActivity.newIntent(QuizActivity.this,answerIsTrue);
+                startActivity(intent);
+            }
+        });
+
 
 
         upDateQuestion();
