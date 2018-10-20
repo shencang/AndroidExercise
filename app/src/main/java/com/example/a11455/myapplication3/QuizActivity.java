@@ -108,10 +108,12 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (mCurrentIndex!=0){
                     mCurrentIndex=(mCurrentIndex-1)%mQuestionBank.length;
+                    mIsCheater=false;
                     getBackQuestion();
                 }else {
                     mCurrentIndex=mQuestionBank.length;
                     mCurrentIndex=(mCurrentIndex-1)%mQuestionBank.length;
+                    mIsCheater=false;
                     getBackQuestion();
                 }
 
