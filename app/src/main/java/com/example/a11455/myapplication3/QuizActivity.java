@@ -179,16 +179,17 @@ public class QuizActivity extends AppCompatActivity {
 
 
         }
+        }
         Toast.makeText(this,messageResId,Toast.LENGTH_SHORT).show();
         Log.d(TAG,Integer.toString(mQuestionBank.length)+" "+Integer.toString(score));
 
         if (mCurrentIndex==mQuestionBank.length-1){
-            Toast toast =  Toast.makeText(QuizActivity.this,"您的得分："+score+"分",Toast.LENGTH_SHORT);
+            Toast toast =  Toast.makeText(QuizActivity.this,"您的得分："+score+"分",Toast.LENGTH_LONG);
             toast.setGravity(Gravity.TOP,0,0);
             toast.show();
             score=0;
         }
-        }
+
 
     }
 
