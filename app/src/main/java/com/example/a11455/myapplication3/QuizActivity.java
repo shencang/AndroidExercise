@@ -29,7 +29,7 @@ public class QuizActivity extends AppCompatActivity {
     private boolean mIsCheater;
 
 
-
+    //定义问题集合
     private Question[] mQuestionBank= new Question[]{
                 new Question(R.string.question_aiLi,true),
                 new Question(R.string.question_xiaoLian,true),
@@ -42,6 +42,7 @@ public class QuizActivity extends AppCompatActivity {
                 new Question(R.string.question_Alkxya,true),
                 new Question(R.string.question_xiaoAi,true)
     };
+    //回传参数收集
     private int mCurrentIndex =0;
 
 
@@ -50,10 +51,12 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         Log.d(TAG,"onCreate(Bundle) called");
+        //获得回传参数
         if (savedInstanceState!=null){
             mCurrentIndex =savedInstanceState.getInt(KEY_INDEX,0);
         }
 
+        //textview点击跳转
         mQuestionTextView = (TextView)findViewById(R.id.question_text_view);
         mQuestionTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +69,7 @@ public class QuizActivity extends AppCompatActivity {
       //  mQuestionTextView.setText(question);
 
 
+        //选择正确的按钮以及点击事件
         mTruebtn = (Button) findViewById(R.id.true_btn);
         mTruebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +82,8 @@ public class QuizActivity extends AppCompatActivity {
                 
             }
         });
+
+        //选择错误的按钮以及点击事件
         mFalsebtn= (Button) findViewById(R.id.false_btn);
         mFalsebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +95,7 @@ public class QuizActivity extends AppCompatActivity {
 
             }
         });
-
+        //选择下一个的按钮以及点击事件
         mNextButton=(ImageButton)findViewById(R.id.next_button);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +108,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        //选择上一个的按钮以及点击事件
         mBackButton=(ImageButton)findViewById(R.id.back_button);
         mBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +128,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        //选择查看答案的按钮以及点击事件
         mCheatButton = (Button)findViewById(R.id.cheat_button);
         mCheatButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,17 +149,20 @@ public class QuizActivity extends AppCompatActivity {
 
 
     }
+    //更新问题方法
     private void upDateQuestion(){
         Log.d(TAG,"Updating question text",new Exception());
         int question =mQuestionBank[mCurrentIndex].getmTextResId();
         mQuestionTextView.setText(question);
     }
 
+    //返回上一个问题方法
     private void getBackQuestion(){
         int question =mQuestionBank[mCurrentIndex].getmTextResId();
         mQuestionTextView.setText(question);
     }
 
+    //选择正确的按钮以及点击事件
     private void checkAnswer(boolean userPressedTrue){
         boolean answerIsTrue =mQuestionBank[mCurrentIndex].ismAnswerTrue();
 
@@ -232,6 +243,7 @@ public class QuizActivity extends AppCompatActivity {
         Log.d(TAG," onDestroy() called");
     }
 
+    //将当前的题号传给子活动
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
@@ -240,6 +252,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     @Override
+    //接受答案确认方法，有错误
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode!= Activity.RESULT_OK){
             return;

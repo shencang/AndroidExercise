@@ -24,6 +24,7 @@ public class CheatActivity extends AppCompatActivity {
     private int seeAnswerNum=3;
     private String TAG = "CheatActivity";
     private String tip;
+    private String KEY_INDEX="Cheat";
 
 
 
@@ -34,14 +35,19 @@ public class CheatActivity extends AppCompatActivity {
 
 
 
+        //获得主活动传入数据
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE,false);
+
+        //获得对应答案显示区域
         mAnswerTextView=(TextView)findViewById(R.id.answer_text_view);
 
+        //显示按钮以及点击事件
         mShowAnswerButton =(Button)findViewById(R.id.show_answer_button);
         mShowAnswerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                //提示用户剩余作弊数量，达到极限关闭作弊按钮
                 tip=getApplicationContext().getResources().getString(R.string.seeAnswer)
                         +Integer.toString(seeAnswerNum-1)
                         +getApplicationContext().getResources().getString(R.string.number_ci);
@@ -54,10 +60,13 @@ public class CheatActivity extends AppCompatActivity {
                     }else{
                         mAnswerTextView.setText(R.string.false_button);
                     }
+                    //刷新答案显示框结果
                     setAnswerShownResult(true);
+                    //临时用于减少作弊数量的参数
                     seeAnswerNum--;
                     Log.d(TAG,Integer.toString(seeAnswerNum));
                 }else {
+                    //关闭按钮的方法
                     if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
                     int cx =mShowAnswerButton.getWidth()/2;
                     int cy =mShowAnswerButton.getHeight()/2;
@@ -88,17 +97,30 @@ public class CheatActivity extends AppCompatActivity {
         });
     }
 
+    //用于启动活动的方法
     public static Intent newIntent(Context packageContext ,boolean answerIsTrue){
         Intent intent =new Intent(packageContext,CheatActivity.class);
         intent.putExtra(EXTRA_ANSWER_IS_TRUE,answerIsTrue);
         return intent;
     }
 
+    //回传是否参考答案的方法
     private void setAnswerShownResult(boolean isAnswerShown){
         Intent data = new Intent();
         data.putExtra(EXTRA_ANSWER_SHOWN,isAnswerShown);
         setResult(RESULT_OK,data);
     }
+
+    //将作弊次数回传的主方法
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.i(TAG,"onSaveInstanceState");
+        outState.putInt(KEY_INDEX,seeAnswerNum);
+
+    }
+
+    //回传作弊次数
     public static boolean wasAnswerShown(Intent result){
         return result.getBooleanExtra(EXTRA_ANSWER_SHOWN,false);
 
