@@ -21,6 +21,10 @@
     <string name="show_answer_button">查看答案</string>
     <string name="cheat_button">想知道怎么选择吗？</string>
     <string name="judgment_toast">骗我是不对的~</string>
+    <string name="seeAnswer">答案还能看</string>
+    <string name="number_ci">次</string>
+    <string name="number_fen">分</string>
+    <string name="showFen">您的得分：</string>
 
 
     <string name="back_button">上一个</string>

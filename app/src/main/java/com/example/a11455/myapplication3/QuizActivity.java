@@ -186,7 +186,7 @@ public class QuizActivity extends AppCompatActivity {
         Log.d(TAG,Integer.toString(mQuestionBank.length)+" "+Integer.toString(score));
 
         if (mCurrentIndex==mQuestionBank.length-1){
-            Toast toast =  Toast.makeText(QuizActivity.this,"您的得分："+score+"分",Toast.LENGTH_LONG);
+            Toast toast =  Toast.makeText(QuizActivity.this,R.string.showFen+score+R.string.number_fen,Toast.LENGTH_LONG);
             toast.setGravity(Gravity.TOP,0,0);
             toast.show();
             score=0;
