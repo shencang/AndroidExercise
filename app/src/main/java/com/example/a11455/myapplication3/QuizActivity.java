@@ -27,6 +27,8 @@ public class QuizActivity extends AppCompatActivity {
     private static final int REQUSET_CODE_CHEAT=0;
     private int score;
     private boolean mIsCheater;
+    private int seeAnswerNum=3;
+    private static final String SEE_ANSWER_NUM="com.example.a11455.myapplication3.seeAnswerNum";
 
 
     //定义问题集合
@@ -139,6 +141,8 @@ public class QuizActivity extends AppCompatActivity {
                 Intent intent = CheatActivity.newIntent(QuizActivity.this,answerIsTrue);
                // startActivity(intent);
                 startActivityForResult(intent,REQUSET_CODE_CHEAT);
+
+               // seeAnswerNum = getIntent().getBooleanExtra(SEE_ANSWER_NUM,false);
             }
         });
 
