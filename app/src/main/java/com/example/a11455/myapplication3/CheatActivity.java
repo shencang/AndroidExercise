@@ -27,6 +27,12 @@ public class CheatActivity extends AppCompatActivity {
     private String KEY_INDEX="Cheat";
 
 
+    //回传作弊次数
+    public static boolean wasAnswerShown(Intent result){
+        return result.getBooleanExtra(EXTRA_ANSWER_SHOWN,false);
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +41,17 @@ public class CheatActivity extends AppCompatActivity {
 
 
 
-        //获得主活动传入数据
+        //获得extra信息
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE,false);
 
         //获得对应答案显示区域
         mAnswerTextView=(TextView)findViewById(R.id.answer_text_view);
+        mAnswerTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(CheatActivity.this,R.string.UserNotTrue,Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //显示按钮以及点击事件
         mShowAnswerButton =(Button)findViewById(R.id.show_answer_button);
@@ -65,6 +77,23 @@ public class CheatActivity extends AppCompatActivity {
                     //临时用于减少作弊数量的参数
                     seeAnswerNum--;
                     Log.d(TAG,Integer.toString(seeAnswerNum));
+
+                    if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+                        int cx =mShowAnswerButton.getWidth()/2;
+                        int cy =mShowAnswerButton.getHeight()/2;
+                        float radius =mShowAnswerButton.getWidth();
+                        Animator anim = ViewAnimationUtils.createCircularReveal(mShowAnswerButton,cx,cy,radius,0);
+                        anim.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+                                mShowAnswerButton.setVisibility(View.INVISIBLE);
+                            }
+                        });
+                        anim.start();
+                    }else {
+                        mShowAnswerButton.setVisibility(View.INVISIBLE);
+                    }
                 }else {
                     //关闭按钮的方法
                     if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
@@ -96,6 +125,12 @@ public class CheatActivity extends AppCompatActivity {
             }
         });
     }
+    //回传是否参考答案的方法
+    private void setAnswerShownResult(boolean isAnswerShown){
+        Intent data = new Intent();
+        data.putExtra(EXTRA_ANSWER_SHOWN,isAnswerShown);
+        setResult(RESULT_OK,data);
+    }
 
     //用于启动活动的方法
     public static Intent newIntent(Context packageContext ,boolean answerIsTrue){
@@ -104,12 +139,7 @@ public class CheatActivity extends AppCompatActivity {
         return intent;
     }
 
-    //回传是否参考答案的方法
-    private void setAnswerShownResult(boolean isAnswerShown){
-        Intent data = new Intent();
-        data.putExtra(EXTRA_ANSWER_SHOWN,isAnswerShown);
-        setResult(RESULT_OK,data);
-    }
+
 
     //将作弊次数回传的主方法
     @Override
@@ -120,9 +150,5 @@ public class CheatActivity extends AppCompatActivity {
 
     }
 
-    //回传作弊次数
-    public static boolean wasAnswerShown(Intent result){
-        return result.getBooleanExtra(EXTRA_ANSWER_SHOWN,false);
 
-    }
 }

@@ -25,6 +25,7 @@
     <string name="number_ci">次</string>
     <string name="number_fen">分</string>
     <string name="showFen">您的得分：</string>
+    <string name="UserNotTrue">你咋还不信了·····</string>
 
 
     <string name="back_button">上一个</string>

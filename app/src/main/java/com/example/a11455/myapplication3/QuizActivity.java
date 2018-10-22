@@ -24,7 +24,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextView mQuestionTextView;
     private static final String TAG=" QuizActivity";
     private static final String KEY_INDEX="index";
-    private static final int REQUSET_CODE_CHEAT=0;
+    private static final int REQUEST_CODE_CHEAT=0;
     private int score;
     private boolean mIsCheater;
     private int seeAnswerNum=3;
@@ -79,6 +79,7 @@ public class QuizActivity extends AppCompatActivity {
 //                        Toast toast =Toast.makeText(QuizActivity.this,R.string.correct_toast,Toast.LENGTH_SHORT);
 //                        toast.setGravity(Gravity.TOP,0,0);
 //                        toast.show();
+                mIsCheater=false;
                 checkAnswer(true);
 
                 
@@ -91,6 +92,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                Toast.makeText(QuizActivity.this,R.string.incorrect_toast,Toast.LENGTH_SHORT).show();
+                mIsCheater=false;
                 checkAnswer(false);
 
 
@@ -140,7 +142,7 @@ public class QuizActivity extends AppCompatActivity {
                 boolean answerIsTrue =mQuestionBank[mCurrentIndex].ismAnswerTrue();
                 Intent intent = CheatActivity.newIntent(QuizActivity.this,answerIsTrue);
                // startActivity(intent);
-                startActivityForResult(intent,REQUSET_CODE_CHEAT);
+                startActivityForResult(intent,REQUEST_CODE_CHEAT);
 
                // seeAnswerNum = getIntent().getBooleanExtra(SEE_ANSWER_NUM,false);
             }
@@ -153,6 +155,8 @@ public class QuizActivity extends AppCompatActivity {
 
 
     }
+
+
     //更新问题方法
     private void upDateQuestion(){
         Log.d(TAG,"Updating question text",new Exception());
@@ -256,12 +260,12 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     @Override
-    //接受答案确认方法，有错误
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    //接受答案确认方法
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode!= Activity.RESULT_OK){
             return;
         }
-        if (requestCode==REQUSET_CODE_CHEAT){
+        if (requestCode==REQUEST_CODE_CHEAT){
             if (data==null){
                 return;
             }
