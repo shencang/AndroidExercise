@@ -29,6 +29,7 @@ public class QuizActivity extends AppCompatActivity {
     private boolean mIsCheater;
     private int seeAnswerNum=3;
     private static final String SEE_ANSWER_NUM="com.example.a11455.myapplication3.seeAnswerNum";
+    private String tip;
 
 
     //定义问题集合
@@ -205,7 +206,10 @@ public class QuizActivity extends AppCompatActivity {
         Log.d(TAG,Integer.toString(mQuestionBank.length)+" "+Integer.toString(score));
 
         if (mCurrentIndex==mQuestionBank.length-1){
-            Toast toast =  Toast.makeText(QuizActivity.this,R.string.showFen+score+R.string.number_fen,Toast.LENGTH_LONG);
+            tip= getApplicationContext().getResources().getString(R.string.showFen)
+                    +Integer.toString(score)
+                    +getApplicationContext().getResources().getString(R.string.number_fen);
+            Toast toast =  Toast.makeText(QuizActivity.this,tip,Toast.LENGTH_LONG);
             toast.setGravity(Gravity.TOP,0,0);
             toast.show();
             score=0;

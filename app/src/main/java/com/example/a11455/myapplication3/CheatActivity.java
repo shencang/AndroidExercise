@@ -72,8 +72,7 @@ public class CheatActivity extends AppCompatActivity {
                     }else{
                         mAnswerTextView.setText(R.string.false_button);
                     }
-                    //刷新答案显示框结果
-                    setAnswerShownResult(true);
+
                     //临时用于减少作弊数量的参数
                     seeAnswerNum--;
                     Log.d(TAG,Integer.toString(seeAnswerNum));
@@ -113,6 +112,9 @@ public class CheatActivity extends AppCompatActivity {
                     mShowAnswerButton.setVisibility(View.INVISIBLE);
                 }
                 }
+
+                //回传结果
+                setAnswerShownResult(true);
 
 
 
